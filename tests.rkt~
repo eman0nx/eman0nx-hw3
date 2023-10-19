@@ -1,0 +1,52 @@
+#lang racket
+
+(require rackunit
+         2htdp/image
+         "hw1.rkt")
+
+(provide TESTS)
+
+(define TESTS
+  (test-suite
+   "hw1"
+
+    (test-case
+        "Exercise 34: Extract first character"
+      (check-equal? (string-first "HelloWorld") "H")
+      (check-equal? (string-first "apple") "a")
+      (check-equal? (string-first "&ampersand") "&"))
+
+    (test-case
+        "Exercise 35: Extract last character"
+      (check-equal? (string-last "HelloWorld") "d")
+      (check-equal? (string-last "apple") "e")
+      (check-equal? (string-last "ampersand&") "&"))
+
+    (test-case
+     "Exercise 36: Count pixels"
+     (check-equal? (image-area cat) 8775))
+
+    (test-case
+     "Exercise 37: Remove first character"
+     (check-equal? (string-rest "HelloWorld") "elloWorld")
+     (check-equal? (string-rest "apple") "pple")
+     (check-equal? (string-rest "ampersand&") "mpersand&"))
+
+    (test-case
+     "Exercise 38: Remove last character"
+     (check-equal? (string-remove-last "HelloWorld") "HelloWorl")
+     (check-equal? (string-remove-last "apple") "appl")
+     (check-equal? (string-remove-last "asd23_*") "asd23_"))
+
+    (test-case
+     "Exercise 40: Image of a car"
+     (check-equal? (tock 20) 23)
+     (check-equal? (tock 78) 81)
+     (check-equal? (tock 20) 38293))    ;fail case
+
+
+))
+   
+(module+ main
+  (require rackunit/text-ui)
+  (run-tests TESTS 'verbose))
